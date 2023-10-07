@@ -1,0 +1,290 @@
+\documentclass{ctexart}
+\ctexset{scheme=chinese}
+\usepackage{amsmath,amsthm,amssymb,physics}
+
+%% 设置页面
+% 两面文档; 装订侧 1cm 缩进.
+% margin: left=right=2.54cm, bottom=top=3.18cm 
+\usepackage{geometry}
+\geometry{left=2.54cm,right=2.54cm,top=3.18cm,bottom=3.18cm}
+\geometry{twoside, bindingoffset=1cm}
+\geometry{b5paper}
+
+% 设置页眉页脚
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyfoot[C]{~----- \thepage ~-----}
+
+% 设置水印
+%\usepackage{background}
+% \backgroundsetup{contents=jiamin,color=red!10,scale=15}
+
+% 设置新命令 & environments 
+\newcommand{\qed}{\rule[0]{8pt}{8pt}}
+% 解、答、注 环境
+\newcounter{problemname}
+\newenvironment{problem}{\stepcounter{problemname}\par\noindent\textbf{题\arabic{problemname}. }}{\par}
+\newenvironment{sol}{\par\noindent\texbf{解. }}{\vspace{2em}} 
+\newenvironment{note}{\par\noindent\texbf{题\arabic{problemname}注. }}{\par\vspace{2em}} 
+
+% 定理、引理、证明环境
+\newtheorem{theorem}{定理}[section]
+\newtheorem{define}{定义}[section] 
+
+% 作者信息
+\author{jia} 
+
+% =========
+% 正文开始
+% =========
+\begin{document} 
+
+% 可选，title 
+%\maketitle 
+\section{力学量}
+
+没有本征值的厄米算符。$\hat{H} = p^2 - x^2$. 处在一个倒转的谐振势中, 因此其会
+加速下滑. $\frac{dx}{dt} = \partial_p H = 2p$. $\frac{dp}{dt} = 2x$. 
+therefore 
+$$
+\frac{d}{dt} 
+\begin{vmatrix} 
+	x \\ p
+\end{vmatrix}
+= 
+\begin{vmatrix } 
+	0 & 2 \\ 2 & 0 	
+\end{vmatrix }
+\begin{vmatrix} 
+	x \\ p	
+\end{vmatrix}
+$$
+therefore $\overline{x}, \overline{p} \mapsto \infty$
+\subsection{力学量的平均值和方均根} 
+
+\begin{enumerate}
+	\item $\overline{A}=\bra{\psi}A\ket{\psi}$
+	\item $\sigma_A^2 = \overline{A^2} - (\overline{A})^2$
+\end{enumerate}
+
+\begin{theorem}
+	\sigma_A^2 \sigma_B^2 \ge 1/4 \langle [A,B]\rangle^2 
+\end{theorem}
+
+对于可对易的力学量算符, 有
+
+\begin{enumerate} 
+	\item 两个算符对易当且仅当两个算符可以直接对角化(或有同一个完备基)
+	\item $[A,B]=0 \ket{\psi}\ne 0, A\ket{\psi}=\lambda\ket{\psi}$.then $B\ket{\psi}$ is also eigenket of $A$. 
+	
+	\item 上面结论的推论: 在 A 的表象下, B 也是分块对角矩阵. 
+	\item $[A,B]=0$ if and only if $A, B$ have common complete eigen-base-ket set. 
+	\item If $[A,B]\ne 0$, then they {\em may} have common eigenket, but all the eigenket is {\em not} complete. 
+\end{enumerate}
+
+一维无限深势井 (对称). 则哈密顿算符和Parity算符对易. i.e. $\Pi \ket{a}$ state
+also has an energy of $E_a$. That is, $\Pi\ket{a}\propto \ket{a}$. 
+
+Take simple harmonic oscillator as example, $[H,\Pi]=0$ , i.e. $\Pi\ket{n}
+=c\ket{n}$. 
+
+\subsection{力学量算符完全集}
+
+Complete Set of Commutating Operators (CSCO): a set of commutating operators that can eliminate degenracy of eigenkets of each eigenvalue. 
+
+For a given physical system, it may have multiple set of CSCO. The exact choice
+of CSCO depends on the problem you want to examine. For example, the {\em
+coupled} and {\em decoupled} representation of angular momentumn. 
+
+Some example of CSCO:
+\begin{enumerate}
+	\item $p_x, p_y, p_z$ 
+	\item $x, y, z$ 
+	\item $(p_x, y, z)$
+	\item $(p^2 / 2m, L^2, L_z)$
+	\item $(L^2, L_z, S^2, S_z)$ and $(J^2, J_z, L^2, S^2)$
+\end{enumerate}
+The use of the 3rd CSCO is: when studying 2D material, we may have to use $k$
+representation and $\vec{x}$ representation simutaniously for convinience. 
+
+坐标表象和动量表象的关系看 Cohen 的书. 
+
+\subsection{测量的相容性问题}
+
+测量的相容性问题等价于算符的可对易性质. 
+
+\begin{define}[相容性] 
+	如果有两个力学量, 相互对易. 则在测量时, 我们可以同时确定两个力学量的测
+	量值. 用数学表示, 则是 
+	$$
+	A \ket{a_n, b_p, i} = a_n \ket{a_n, b_p, i} 
+	$$
+	$$
+	B \ket{a_n, b_p, i} = b_p \ket{a_n, b_p, i} 
+	$$
+	此处, $a_n, b_p, i$ 分别是 $A, B$ 的本征值和共同简并度. 
+	并且, 如果 $A, B$ 对易, 则先测量 $A$, 再测量 $B$; 和先测量 $B$, 再测量
+	$A$ 的结果是一样的. 
+\end{define}
+
+解释一下. 先侧 $A$, then $B$. 设 
+$$
+\ket{\psi} = \sum_{n,p,i}^{\infty}  c_{n,p,i}\ket{a_n, b_p, i} 
+$$
+
+\section{量子化规则}
+
+这一节研究
+\begin{itemize} 
+    \item 如何赋予力学量算子? 
+    \item 如何描述力学量的时间演化? 
+\end{itemize}
+解决这两个问题, 我们就进入了量子力学. 这个过程是一个无厘头的过程. 有两套量子化的
+方法: 1) 正则量子化. 由薛定谔和海森堡给出. 2) 路径积分量子化, 由费曼提出. 
+
+正则量子化: 由经典力学语言转化到哈密顿力学. 即 Poisson Bracket 和 对易子之间的关
+系. 
+
+路径积分量子化基于拉格朗日量(在Lorentz变换下不变). 
+
+我们采用正则量子化. 其又分成两种方法. 第一种: 通过 Poisson Brackets 完成, 即通过
+将 Poisson 括号升级为量子力学中的对易子. 第二种: 经典力学中的正则变换升级为量子
+力学中的 Unitary 对称变换的等价性完成. 
+\footnote{其实这两种方法完全等价. Sakurai 的方法是采用正则变换的方法}
+正则变换强调了对称变换的问题. 而空间平移算符和空间转动算符直接导致了动量和角动量
+. 
+
+我们两种方法都讲. 
+
+\subsection{基于泊松括号的量子化规则} 
+
+如果考虑处于一个标量场中的无自旋粒子, 规定与 $(x,y,z)$ 对应的算子为 $(X, Y, Z)$;
+规定与 $p_x,p_y,p_z)$ 对应的算符为 $P=-i\hbar \nalba$. 由此推出, 
+\[
+\forall A, A=A(r,p,t) \mapsto \hat{A} = \hat{A}(R,P,t)
+\]
+升级到量子力学后, $\vec{R}\cdot \vec{P}\ne \vec{P}\cdot \vec{R}$. 为了解决这个问
+题, 将这个东西变成 $\frac{1}{2} (\vec{r}\codt \vec{p} + \vec{p}\codt \vec{r})$ . 
+
+对力学量算符选择的原则:
+\begin{itemize} 
+    \item 对称性
+    \item 无论如何选择, 我们的选择都是主观的. 因此需要和实验对比. 只要能解释实验,
+	就说明我们的选择是正确的. 
+    \item 在某种极限下, 量子力学将回归经典力学, 二者给出相同的语言. 
+\end{itemize}
+
+量子力学中, $[R_i,P_j]=i\hbar\delta_{ij}$. 这告诉我们经典力学和量子力学对易关系
+的对应为 
+\[
+    \{,\} \mapsto \frac{1}{i\hbar }[,]
+\]
+
+从经典到量子分下面几步: 
+1) $[Q_i, P_j]=i\hbar\delta_{ij}$. 
+2) 哈密顿方程变成薛定谔方程. 哈密顿方程为 
+\[
+    \frac{dq_i}{dt} = \{q_i, H\} = \frac{\partial H}{\partial p_i}
+\]
+\[
+    \frac{dp_i}{dt} = \{p_i,H\} = -\frac{\partial H}{\partial q_i} = -
+    \frac{\partial H}{\partial t}
+\]
+海森堡picture为 
+\[
+\frac{d\Omega}{dt} = \frac{\partial \Omega}{\partial t} + \frac{1}{i\hbar }
+[\Omega, H]
+\]
+\footnote{若 $\Omega$ 和时间无关, 且 $[\Omega,H]=0$, 则 $\Omega$ 不随着时间演化.}
+
+Shrodinger的假设为: $\forall \ket{\psi(t)}, H(t): i\hbar \frac{d}{dt}
+\ket{\psi(t)} = H(t)\ket{\psi(t)}$. 
+实验中有意义的是, 力学量 $\Omega$ 在时间 $t$ 的期望值. 期望写作 
+\[
+    \bra{\psi(t)}\Omega\ket{\psi(t)} 
+\]
+\[
+\frac{d}{dt}\overline{\Omega} = \bra{\psi}\frac{\partial \Omega}{\partial t}
+\ket{\psi} 
++ [\frac{d}{dt}\ket{\psi}]\Omega\ket{\psi} 
++ \bra{\psi}\Omega[\frac{d}{dt}\ket{\psi}]
+\]
+\[
+\Rightarrow \frac{d}{dt}\overline{\Omega} = \bra{\psi}\frac{\partial\Omega}
+{\partial t} \ket{\psi} + \frac{1}{i\hbar }\bra{\psi}[\Omega, H] \ket{\psi} 
+\]
+经典力学中, 泊松括号和正则坐标选择无关. 
+
+\subsection{对称变换:连续} 
+
+所谓连续对称变换, 指的是对称变换可以用一个连续的参数描述的对称变换. 所以反射变换
+/格点平移操作 不是连续性的对称变换. 
+
+此处, 对称性是力学量在变换下所具有的不变性. 
+
+\begin{theorem}[Nother's Law]
+    一个对称不变性对应一个守恒量. 
+\end{theorem}
+
+例如, 若 $L(q+dq, v, t)= L(q,v,t)$, 则根据拉格朗日方程可知, 正则动量
+$\frac{\partial}{\partial v}L=\frac{d}{dt}P=0$. 即正则动量守恒. 
+
+量子力学中的连续对称变换其实是经典力学中正则变换的推广. 因此将诺特定理推广到量子
+体系: 空间平移/旋转 对应动量和角动量. 
+
+平移操作. 
+\[
+T(a): T(a)\psi(x) \mapsto \eta(x): eta(x+a) = \psi(x)
+\]
+\[
+\begin{align} 
+    \eta(x) &= \psi(x-a) \\
+	    &= \sum_{n=1}^{\infty} \frac{1}{n!} (\frac{d}{dx})^n \psi(x) \\
+	    &= \sum_{n=0}^{\infty}\frac{1}{n!}\Bigl[ (-i) a(-\frac{id}{dx})\Bigr]
+	    ^n\psi(x) \\
+	    &= \exp(-ia\codt p) \psi(x) 
+\end{align}
+\]
+因此, 平移算子
+ \[
+T(a) \equiv \exp(-i \vec{a}\cdot \vec{p}) 
+\]
+如果 $a \ll 1$, then $\eta(x)=(1 - ia\cdot p)\psi(x)$. 因此 
+\[
+T(a\ll 1) = 1 - i \vec{a}\cdot \vec{p} 
+\]
+称作无穷小平移算子. $p$ 是无穷小平移的生成元. 
+
+定轴转动: $L=\frac{1}{2}M\codt\theta^2$. 
+\[
+R_n(d\theta): \psi(\vec{r}) \mapsto \psi(\vec{r}-d \vec{r}); d \vec{r}=\vec{n}
+\times \vec{r} d\theta 
+\]
+\[
+    \begin{align*} 
+	\psi(\vec{r}- d \vec{r}) &= \psi(\vec{r})-\nabla \psi(\vec{r}) \cdot d \vec{r}
+	\\
+	&= \psi(\vec{r}) - \nabla \psi(\vec{r})(d\theta \vec{n}\times \vec{r})\\
+	&= \psi(\vec{r}) - d\theta \vec{n}\cdot (\vec{r}\times\nabla\psi(r)) \\
+	&= [1 - i\vec{n}\codt(\vec{r}\times(-i\nabla))]\psi(\vec{r})
+    \end{align*}
+\]
+因此, 无穷小转动算符为 
+\[
+R_n(d\theta) = 1 - id\theta \vec{n}\cdot(\vec{r}\times (-i\nabla))
+\]
+注意, $\vec{n}\cdot[\vec{r}\times(-i\nabla)]=L_n$. 
+现在计算 $R_n(\theta+d\theta)$. 
+\begin{align*} 
+    R_n(\theta+d\theta) &= R_n(\theta)R_n(d\theta) 
+\end{align*}
+
+\begin{problem}[作业]
+    利用角动量是无穷小转动的生成元这一观念, 求出球坐标下 $L_x, L_y, L_z$ 的形式.
+\end{problem}
+\begin{sol} 
+    $L_z$ : $R_z(\epsilon\ll 1)$
+\end{sol}
+\end{document} 
+
+

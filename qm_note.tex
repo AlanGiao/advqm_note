@@ -283,8 +283,207 @@ R_n(d\theta) = 1 - id\theta \vec{n}\cdot(\vec{r}\times (-i\nabla))
     利用角动量是无穷小转动的生成元这一观念, 求出球坐标下 $L_x, L_y, L_z$ 的形式.
 \end{problem}
 \begin{sol} 
-    $L_z$ : $R_z(\epsilon\ll 1)$
-\end{sol}
-\end{document} 
+    $L_z$ : $R_z(\epsilon\ll 1)$. 
+    $L_x$ : 是绕着 x 旋转的无穷小生成元。考虑 $R_x (\epsilon)$. 
+    $x = r\sin\theta\cos \phi , y = r \sin \theta \sin \phi $. 
+    After rotation, $r'\mapsto r, \phi \mapsto \phi+d \phi, \theta' \mapsto
+    \theta + d \theta$.  此时, 由于绕着 x 轴旋转， 因此 x 坐标不变：
+    \[
+	x' \mapsto r\sin( \theta + d \theta )\cos( \phi + d \phi )  = x
+    \]
+    泰勒展开到一阶，我们得到
+    \[
+	(\sin \theta + \cos \theta d \theta )(\cos \phi - \sin \phi d \phi )
+	= \sin \theta \cos \phi 
+    \]
+    保留一阶微分项，则
+    $d \theta = - \frac{\sin \theta \sin \phi }{\cos \theta \cos \phi }d \phi
+    $. 
+    
+    变换后，新坐标和老坐标之间的关系为
+    \[
+    \begin{cases}
+	z' &= \cos \epsilon z + \sin \epsilon y \\
+	y' &= \cos \epsilon y - \sin \epsilon z
+    \end{cases}
+    \]
+    这个式子的得出需要利用 $x,y,z$ 的轮换对称性. 然后利用绕 $z$ 旋转时 $x,y$ 
+    的变换规则写出上面两个式子. 利用 $z', z$ 之间的关系，得到
+    \[
+	\cos( \theta + d \theta ) 
+	= \cos \epsilon \cos \theta + \sin \epsilon \sin \theta \sin \phi 
+    \]
+    \[
+    \Rightarrow d \theta = - \epsilon \sin \phi 
+    \]
+    \[
+    \Rightarrow d \phi = \frac{\cos \theta \cos \phi }{\sin \theta } \epsilon 
+    \]
+    \[
+    \psi(r) \mapsto g(r), 
+    \eta (r, \theta, \phi ) = \psi (r, \theta-d \theta, \phi-d \phi)
+    = \psi(r, \theta+\sin \phi \epsilon , \phi + \frac{\cos \theta \cos \phi }
+    {\sin \theta }\epsilon )
+    \]
+    \[
+    = \psi+\sin \phi \epsilon \frac{\partial \psi }{\partial \theta } 
+    + \frac{\cos \theta \cos \phi }{\sin \theta }\epsilon \frac{\partial \psi }
+    {\partial \phi } 
+= [1 - i \epsilon L_x ] \psi 
+\]
+   i.e. 
+   \[
+   L_x = i\sin \phi \frac{\partial  }{\partial \theta } + 
+   i\cos \phi \cot \theta \frac{\partial  }{\partial \phi }  
+   \]
+   \qed
+\end{sol} 
+
+\subsection{平移对称操作的形式理论} 
+
+$T (a) \ket{r} = \ket{r+a}$ 是平移操作定义. 于是 $\forall \psi$, 考虑 
+\[
+\bra{r}T(a) \ket{\psi} = 
+\int dr' \bra{r}T(a)\ket{r'}\braket{r'}{\psi}
+\]
+这等于 
+\[
+\int dr' \delta (r-r'-a) \psi (r') = \psi (r-a) 
+\]
+
+平移操作的性质：
+\begin{itemize}
+    \item 性质1. $\bigl[ T(dx) \bigr]^\dag T(dx) = I$. This is required by the
+	normalization of prob. 
+    \item 性质2. It is an abellian group. i.e. $\forall a, b: T(a)T(b)=T(b)T(a)=T(a+b)$ 
+    \item 性质三：$\lim_{dx\mapsto 0}T(dx)=I$
+\end{itemize} 
+
+展开 T(a): $T(dx)=I-i\vec{k}\cdot d \vec{x}$ . 容易知道 $T^\dag(dx) = I + i
+\vec{k}\cdot d \vec{x} = T(-dx) = T^{-1}(dx)$. 
+\marginpar{\footnotesize 为什么这么展开?}
+\[
+  \vec{k} = i \frac{dT}{dx}\Big|_{x_0=0} = i \nabla T \big|_{x_0=0}
+\]
+\[
+    T^\dag (dx) T(dx) = I = [ I + i \vec{k}\cdot d \vec{x} ] 
+[ I - i \vec{k} \cdot d \vec{x} ] 
+= I + i \vec{dx} \cdot [ k^\dag - k ]
+\]
+因此 $k^\dag = k$. 
+
+\[
+T(a) = \exp(-i \vec{k} \cdot \vec{a}) 
+\]
+
+What is the commutator of $[R,k]$? 
+$\forall \vec{r}: T(a)R\ket{\vec{r}}- RT(a)\ket{\vec{r}} = -a T(a)\ket{\vec{r}}
+$
+ 
+这里先计算一个结论: 
+\[
+f( \lambda ) = e^{ \lambda A} B e^{- \lambda A}
+\]
+\[
+\frac{d}{d \lambda }f( \lambda ) \Bigr|_{\lambda =0} = 
+e^{\lambda A}[A,B]e^{- \lambda A} = [A, B] 
+\]
+\[
+    \frac{d^2 }{d \lambda ^2 }f( \lambda )\Bigr|_{\lambda =0} = [A, [A,B]
+\]
+\[
+\therefore e^A B e^{-A} = \sum_{n=0}^{\infty} \frac{1}{n!} f^{(n)}( \lambda =0) 
+= \sum_{n=1}^{\infty} \frac{1}{ n!} [C_A ]^n B 
+= e^{C_A} B 
+\]
+\begin{problem}[Homework]
+    证明 $e^A B e^A = e^{S_A}B$. $S_A B = \{A,B\}$. 
+\end{problem}
+
+\begin{theorem}[CBH equation]
+    if $[[A,B],A] = [[A,B],B]$, \text{then  
+    $e^A e^B = e^{A+B} e^{\frac{1}{2}[A,B] }$. 
+\end{theorem}
+\begin{proof}
+    $F(t) = e^{At}e^{Bt}$, 
+    \[
+	\frac{d}{dt} e^{At} (A+B) e^{Bt} = [A + e^{At} B e^{-At} ] e^{At} e^{Bt}
+    \]
+    \[
+	= [A+B+t[A,B] ] e^{At}e^{Bt} 
+    \]
+    
+    Homework
+    \[
+	e^{At} e^{Bt} = \exp[(A+B)t + \frac{1}{2} t^2 [A,B]] 
+    \]
+\end{proof}
+
+Calculate $T(a)R T^{-1}(a) = \exp[-i \vec{k}\cdot \vec{r}] \exp[i \vec{k}\cdot
+\vec{a} ]$. This equals to $R+[-i \vec{k}\cdot \vec{a}, \vec{R}] + \frac{1}{2}
+[-i \vec{k} \cdot \vec{a}, [ - i \vec{k} \vec{a}, R]]$
+therefore $T(a)R T^{-1}(a) = R - a$. 
+so $-a = [-i \vec{k} \cdot \vec{a}, \vec{R}] \Rightarrow [R_i ,K_j ]=i
+\delta_{ij}$ 
+
+We can also conclude that $[K_i ,K_j ]=0$. This is because 
+$[T(dy),T(dx)=0$ ~-- i.e. $[1-i K_y dy, 1 -i K_x dx]=0$. 
+
+Therefore we rename $K$ as momentumn operator, which is the genreator of
+translation operation. 
+
+\subsubsection{Deriviation of Hamilton Equation Using Generator} 
+
+Define  $S = S( q^i, q^f, t^i, t^f)$. Then 
+
+\[
+\begin{align*}
+    \delta S 
+    &= \int_{t^i}^{t_f} 
+    \Bigl[ \frac{\partial L}{\partial q} \delta q 
+    + \frac{\partial L}{\partial \dot{q}} \delta \dot{q}\Bigr] dt \\
+    &= \int \biggl[ \frac{\partial L}{\partial q} \delta q 
+    + \frac{d}{dt} \frac{\partial L}{\partial \dot{q}} \biggr]
+\end{align*}
+\]
+
+\subsubsection{Canonical transformation and Generator}
+
+若在拉格朗日力学下, 写出粒子的拉格朗日量. $L(q, \dot{q}, t)$. If we use another
+coordinate to rewrite L as $L(Q, Q, t)$. But the Euler-Lagrange eq. is
+invariant, so $Q$ is time function of $q$ : $q \mapsto Q(q,t)$. So we can
+transition to Hamiltion mechanics. 哈密顿力学允许更广泛 的变换. 哈密顿力学允许
+新坐标作为旧坐标/动量的函数; 新动量作为旧坐标/动量的函数. 
+
+并非所有这种变换可以保持哈密顿方程不变. 要 $(q,p,H)\mapsto (Q,P,H)$, 要求新系统
+仍旧保持正则方程性质不变, 问需要对变换加入什么限制? 
+
+如果正则方程满足, 等价于作用量的变分等于0. 这意味着 
+$\delta [\int PdQ - H' dt] =0$. $H'$ is the new Hamiltionian. \\
+Old: $\delta \int [pdq - Hdt]=0$. 
+If $pdq - Hdt = PdQ - H'dt + dF$. Here the $F$ funciton is called the genrator
+(生成函数). 
+
+我们可以把 $dF = pdq - PdQ + (H'-H) dt$. i.e. $F=F(q,Q,t)$. 此时,
+$p = \frac{\partial F}{\partial q} , P = \frac{\partial F}{\partial Q}, H' + H
++ \frac{\partial F}{\partial t} $ 
+
+正则变换是保泊松括号的. 
+
+我们用的生成函数是 $F+PQ$. 
+$d(F+PQ) = pdq + QdP + (H' -H) dt$, $p = \frac{\partial \Phi }{\partial q} $, 
+$Q = \frac{\partial \Phi }{\partial P} $, $H' = H + \frac{\partial \Phi }{\partial
+t} $
 
 
+
+
+
+
+
+
+
+
+
+
+\end{document}

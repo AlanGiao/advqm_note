@@ -339,151 +339,266 @@ R_n(d\theta) = 1 - id\theta \vec{n}\cdot(\vec{r}\times (-i\nabla))
    \qed
 \end{sol} 
 
-\subsection{平移对称操作的形式理论} 
+\subsection{平移操作的形式理论}
 
-$T (a) \ket{r} = \ket{r+a}$ 是平移操作定义. 于是 $\forall \psi$, 考虑 
+$T(a) \ket{r} = \ket{r+a}$ 是平移操作的定义. $\forall \psi,$ 有
 \[
-\bra{r}T(a) \ket{\psi} = 
-\int dr' \bra{r}T(a)\ket{r'}\braket{r'}{\psi}
-\]
-这等于 
-\[
-\int dr' \delta (r-r'-a) \psi (r') = \psi (r-a) 
-\]
-
-平移操作的性质：
-\begin{itemize}
-    \item 性质1. $\bigl[ T(dx) \bigr]^\dag T(dx) = I$. This is required by the
-	normalization of prob. 
-    \item 性质2. It is an abellian group. i.e. $\forall a, b: T(a)T(b)=T(b)T(a)=T(a+b)$ 
-    \item 性质三：$\lim_{dx\mapsto 0}T(dx)=I$
-\end{itemize} 
-
-展开 T(a): $T(dx)=I-i\vec{k}\cdot d \vec{x}$ . 容易知道 $T^\dag(dx) = I + i
-\vec{k}\cdot d \vec{x} = T(-dx) = T^{-1}(dx)$. 
-\marginpar{\footnotesize 为什么这么展开?}
-\[
-  \vec{k} = i \frac{dT}{dx}\Big|_{x_0=0} = i \nabla T \big|_{x_0=0}
-\]
-\[
-    T^\dag (dx) T(dx) = I = [ I + i \vec{k}\cdot d \vec{x} ] 
-[ I - i \vec{k} \cdot d \vec{x} ] 
-= I + i \vec{dx} \cdot [ k^\dag - k ]
-\]
-因此 $k^\dag = k$. 
-
-\[
-T(a) = \exp(-i \vec{k} \cdot \vec{a}) 
+    \begin{align*}
+	\bra{r}T(a)\ket{\psi} &= \int dr' \bra{r}T(a)\ket{r'}\braket{r'}{\psi}
+	\\
+			      &= \int dr' \delta (r-r'-a) \psi (r') = \psi (r-a)
+    \end{align*}
 \]
 
-What is the commutator of $[R,k]$? 
-$\forall \vec{r}: T(a)R\ket{\vec{r}}- RT(a)\ket{\vec{r}} = -a T(a)\ket{\vec{r}}
-$
- 
-这里先计算一个结论: 
+平移操作的性质:
+\begin{enumerate}
+    \item $[T(dx)]^\dag T(dx) = I$. 这是由概率的归一化要求的. 
+    \item 平移操作是一个阿贝尔群. 即 $\forall a,b: T(a)T(b)=T(b)T(a)=T(a+b)$. 
+    \item $\lim_{dx \to 0}T(dx)=I $
+\end{enumerate}
+
+展开 $T(a)$ : 在 0 附近展开得到 $T(dx) = I - \vec{ik}\cdot d \vec{x}$. 容易知道 
+$T^\dag = I + i \vec{k} \cdot d \vec{x} = T^{-1} (dx)$. 
+\marginpar{\footnotesize 为何这样展开?} 
+因此 
 \[
-f( \lambda ) = e^{ \lambda A} B e^{- \lambda A}
+\vec{k} = i \frac{dT}{dx}\Big|_{x_0=0} = i \nabla T|_{x_0=0}
 \]
+所以
 \[
-\frac{d}{d \lambda }f( \lambda ) \Bigr|_{\lambda =0} = 
-e^{\lambda A}[A,B]e^{- \lambda A} = [A, B] 
+\begin{align*}
+    T^\dag (dx) T(dx) &= I \\
+		      &= [ I + i \vec{k} \cdot d \vec{x} ] [I - i \vec{k} \cdot
+		      d \vec{x} ] \\
+		      &= I + i d \vec{x} \cdot [ k^\dag - k] 
+\end{align*}
 \]
-\[
-    \frac{d^2 }{d \lambda ^2 }f( \lambda )\Bigr|_{\lambda =0} = [A, [A,B]
-\]
-\[
-\therefore e^A B e^{-A} = \sum_{n=0}^{\infty} \frac{1}{n!} f^{(n)}( \lambda =0) 
-= \sum_{n=1}^{\infty} \frac{1}{ n!} [C_A ]^n B 
-= e^{C_A} B 
-\]
+$\therefore k^\dag = k$. 
+
+还可以知道 $T(a) = \exp[- i \vec{k} \cdot \vec{a}]$ . 
+
+这里插入一个点, $[T(a), R] \ket{r} = T(a) R \ket{r} - R T(a) \ket{r} = -a T(a)
+\ket{r} $ . 
+
+那么 $[R,k]$ 等于多少呢? 下面先计算一个结论. 
+
+\begin{problem}
+    证明  $e^A B e^{- \lambda A}= $
+\end{problem}
+\begin{sol}
+    先计算 
+    \[
+	f( \lambda ) = e^{ \lambda A } B e^{- \lambda A}
+    \]
+    \[
+    \begin{align*}
+        \frac{d}{d \lambda } f( \lambda )|_{ \lambda = 0 } 
+	&= e^{\lambda A}[A, B] e^{- \lambda A} \\
+	&= [A, B] 
+    \end{align*}
+    \]
+    \[
+    \begin{align*}
+        \frac{d^2 }{d \lambda^2 }f( \lambda ) |_{\lambda =0}
+	&= [A, [A,B]] 
+    \end{align*}
+    \]
+    therefore 
+    \[
+	\begin{align*}
+	    e^A B e^{-A} &= \sum_{n=0}^{\infty} \frac{1}{n!} f^{(n)}( \lambda =0) \\
+			 &= \sum_{n=0}^{\infty} \frac{1}{n!} [C_A]^n B \\
+			 &= e^{C_A} B
+	\end{align*}
+    \]
+    \qed
+\end{sol}
+
 \begin{problem}[Homework]
-    证明 $e^A B e^A = e^{S_A}B$. $S_A B = \{A,B\}$. 
+    证明: $e^A B e^A = e^{S_A} B$, where $S_A = \{A, B\}$
 \end{problem}
 
-\begin{theorem}[CBH equation]
-    if $[[A,B],A] = [[A,B],B]$, \text{then  
-    $e^A e^B = e^{A+B} e^{\frac{1}{2}[A,B] }$. 
+\begin{theorem}[C-B-H equation]
+    if $[[A,B],A] = [[A,B],B]$, \text{then} 
+    $e^A e^B = e^{A+B} e^{\frac{1}{2}[A,B]}$. 
 \end{theorem}
 \begin{proof}
-    $F(t) = e^{At}e^{Bt}$, 
+    Define $F(t) = e^{At} e^{Bt}$. So 
     \[
-	\frac{d}{dt} e^{At} (A+B) e^{Bt} = [A + e^{At} B e^{-At} ] e^{At} e^{Bt}
-    \]
-    \[
-	= [A+B+t[A,B] ] e^{At}e^{Bt} 
-    \]
-    
-    Homework
-    \[
-	e^{At} e^{Bt} = \exp[(A+B)t + \frac{1}{2} t^2 [A,B]] 
+    \begin{align*}
+        \frac{d}{dt} F(t)
+	&= e^{At} (A+B) e^{Bt} \\
+	&= [A + e^{At} B e^{-At} ] e^{At} e^{Bt} \\
+	&= [A + e^{C_A}B ] e^{A} e^{B} \text{ when t=1} 
+    \end{align*}
     \]
 \end{proof}
 
-Calculate $T(a)R T^{-1}(a) = \exp[-i \vec{k}\cdot \vec{r}] \exp[i \vec{k}\cdot
-\vec{a} ]$. This equals to $R+[-i \vec{k}\cdot \vec{a}, \vec{R}] + \frac{1}{2}
-[-i \vec{k} \cdot \vec{a}, [ - i \vec{k} \vec{a}, R]]$
-therefore $T(a)R T^{-1}(a) = R - a$. 
-so $-a = [-i \vec{k} \cdot \vec{a}, \vec{R}] \Rightarrow [R_i ,K_j ]=i
-\delta_{ij}$ 
+\begin{problem}[Homework]
+    证明 $e^{At}e^{Bt} = \exp[ (A+B) t + \frac{1}{2} t^2 [A,B] ] $
+\end{problem}
 
-We can also conclude that $[K_i ,K_j ]=0$. This is because 
-$[T(dy),T(dx)=0$ ~-- i.e. $[1-i K_y dy, 1 -i K_x dx]=0$. 
+\begin{problem}
+    计算 $T(a) R T^{-1} (a) \ket{r} = T(a) R \ket{r-a} = r-a$ . 
+    
+    首先计算 $T(a) R T ^{-1} (a) $
+    \[
+	\begin{align*}
+	    T(a) R T^{-1}(a) &= \exp( -i \vec{k} \cdot \vec{a}) 
+	    R \exp(  i \vec{k} \cdot \vec{a}) \\
+			     &= R + 
+			     [ -i \vec{k} \cdot \vec{a}, \vec{R}] + 
+			     \frac{1}{2} [-i \vec{k} \cdot \vec{a}, [- i \vec{k}
+			     \cdot \vec{a}, \vec{R} ]] \\ 
+			     &= R - a
+	\end{align*}
+    \]
+    对比可知,
+     \[
+	 -a = [-i \vec{k} \cdot \vec{a} , \vec{R}]
+	 + \frac{1}{2} \Bigl[ 
+	     -i \vec{k} \cdot \vec{a}, [ -i \vec{k} \cdot a , \vec{R}] \Bigr]
+    \]
+\end{problem}
 
-Therefore we rename $K$ as momentumn operator, which is the genreator of
-translation operation. 
+这个题目的计算结果可以推出基本的正则对易关系: 
+\[
+    [R_i , K_j ] = i \delta _{ij}
+\]
 
-\subsubsection{Deriviation of Hamilton Equation Using Generator} 
+类似地, 利用 $[T(dx), T(dy)]=0$ 可以推出 $[1 - iK_y dy, 1-iK_x dx]=0$. 这意味着
+\[
+    [K_i ,K_j ]=0
+\]
 
-Define  $S = S( q^i, q^f, t^i, t^f)$. Then 
+至此, 我们可以将 $K$ 认为是动量算符, 其是无限小平移操作的生成元. 
+
+\subsubsection{用生成元推导哈密顿方程} 
+
+作用量定义为 $S = S \int_{t_1}^{t_2} L dt$. 已知哈密顿量 
+\[
+H = \sum_{\alpha }^{\infty} \frac{\partial L}{\partial \dot{q}_\alpha} - L  
+\] 
+
+则哈密顿原理写作
+\[
+    \begin{align*}
+        \delta \int_{t_1}^{t_2} Ldt 
+	&= \int_{t_1}^{t_2} \delta \biggl[ \sum_{\alpha}^{\infty} 
+	p_\alpha \dot{q}_\alpha - H \biggr] dt \\
+	&= 0 \\ 
+	\therefore &\int_{t_1}^{t_2} \Bigl[ \sum_{\alpha}^{\infty} 
+	\dot{q}_\alpha \delta p_\alpha + p_\alpha \delta \dot{q}_\alpha 
+    - \delta H \Bigr] dt =  0 \\ 
+    \end{align*}
+\] 
+\[
+\Rightarrow \int_{t_1}^{t_2} \Bigl[ \sum_{\alpha}^{\infty}
+(\dot{q}_\alpha \delta p_\alpha - \dot{p}_\alpha \delta q_\alpha
++ \sum_{\alpha}^{\infty} \frac{d}{dt} (p_\alpha \delta q_\alpha ) - \delta H
+\Bigr] dt =0
+\] 
+\[
+\Rightarrow  \int_{t_1}^{t_2} \Bigl[ \sum_{\alpha}^{\infty} (\dot{q}_\alpha
+\delta p_\alpha - \dot{p}_\alpha \delta q_\alpha - \delta H \Bigr]  dt 
+=0
+\] 
+\[
+\Rightarrow  \int_{t_1}^{t_2} \Bigl[ 
+\sum_{\alpha}^{\infty}(\dot{q}_\alpha \delta p_\alpha - \dot{p}_\alpha \delta
+q_\alpha ) 
+- \sum_{\alpha}^{\infty} \Bigl( 
+\frac{\partial H}{\partial p_\alpha} \delta p_\alpha + 
+\frac{\partial H}{\partial q_\alpha} \delta q_\alpha 
+\Bigr) 
+\Bigr] dt 
+\] 
+\[
+\Rightarrow \int_{t_1}^{t_2} 
+\sum_{\alpha}^{\infty} \biggl[ 
+\Bigl( \dot{q}_\alpha - \frac{\partial H}{\partial p_\alpha}  \Bigr) 
+- 
+\Bigl( \dot{p}_\alpha + \frac{\partial H}{\partial q_\alpha}  \Bigr)
+\biggr]  dt 
+=0
+\] 
+因为 $\delta p_\alpha, \delta q_\alpha$ 是独立的变分, 因此
+\[
+    \begin{align*}
+        \frac{\partial H}{\partial p_\alpha} &= \dot{q}_\alpha \\
+	\frac{\partial H}{\partial q_\alpha} &= - \dot{p}_\alpha
+    \end{align*}
+\] 
+这就是 {\kaishu 哈密顿正则方程} 
+
+\subsubsection{正则变换} 
+
+我们可以取不同的广义坐标和广义动量作为哈密顿量的变量. 那么要保持哈密顿正则方程
+不变, 就需要一个特殊的变换 ~--- 正则变换. 
+
+记新坐标, 动量为 $q_\alpha', p_\alpha'$. 相应的新哈密顿量为 $H'(q'_\alpha,
+p'_\alpha$. 
+
+要使得新哈密顿依旧保持哈密顿正则方程, 等价于使新哈密顿量满足最小作用量原理. 
+ \[
+\begin{align*}
+    \delta S' &= \delta \int \Bigl[ L'(q'_\alpha, p'_\alpha) dt \Bigr] \\ 
+    &= \delta \biggl[ \int 
+    \bigl(\sum_{\alpha}^{\infty}p'_\alpha \dot{q}'_\alpha - H'\bigr) dt \biggr] \\ 
+    &= \delta \biggl( \int \sum_{\alpha}^{\infty}
+    p_\alpha' dq_\alpha' - H' dt \biggr) \\ 
+    &= 0 \\ 
+\end{align*}
+\] 
+
+原来的哈密顿量肯定满足最小作用量原理, 因此
+\[
+\delta \biggl( 
+\sum_{\alpha}^{\infty}p_\alpha dq_\alpha - Hdt  \biggr) =0	    
+\] 
+
+两个式子相加, 得到 
+\[
+\delta \biggl[ 
+\sum_{\alpha}^{\infty} (p_\alpha dq_\alpha - p'_\alpha dq'_\alpha ) 
++ (H-H') dt \biggr] \equiv dU_1 = 0
+\] 
+
+观察可知, $\frac{\partial U_1}{\partial q_\alpha} = p_\alpha, 
+\frac{\partial U_1}{\partial q'_\alpha} = -p'_\alpha, 
+\frac{\partial U_1}{\partial t} = H-H'$ 
+这样 $U_1$ 其实是 $q'_\alpha, p'_\alpha$ 的函数, 因此 $U_1$ 就可以描述正则变换. 
+
+通过Legendre 变换可以得到其他三种正则变换母函数. 
 
 \[
 \begin{align*}
-    \delta S 
-    &= \int_{t^i}^{t_f} 
-    \Bigl[ \frac{\partial L}{\partial q} \delta q 
-    + \frac{\partial L}{\partial \dot{q}} \delta \dot{q}\Bigr] dt \\
-    &= \int \biggl[ \frac{\partial L}{\partial q} \delta q 
-    + \frac{d}{dt} \frac{\partial L}{\partial \dot{q}} \biggr]
+    dU_1 &= \sum_{\alpha}^{\infty} (p_\alpha dq_\alpha - p'_\alpha dq'_ \alpha) 
+    + (H-H') dt	\\ 
+    &= \sum_{\alpha }^{\infty} p_ \alpha dq_ \alpha - [ d(p'_ \alpha q'_ \alpha
+    ) - q'_ \alpha dp'_ \alpha ] \\ 
+    &= \sum_{\sigma }^{\infty} (p_ \alpha dq_ \alpha + q'_ \alpha dp'_ \alpha )  
+    - \sum_{\sigma }^{\infty} d(p'_ \alpha q'_ \alpha ) 
+    - (H' -H)dt	\\ 
 \end{align*}
-\]
+\] 
+因此, 
+\[
+dU_2 = d(U_1 + \sum_{\alpha }^{\infty} p'_ \alpha q'_ \alpha ) 
+\] 
 
-\subsubsection{Canonical transformation and Generator}
+此时, 哈密顿方程依旧不变. 
 
-若在拉格朗日力学下, 写出粒子的拉格朗日量. $L(q, \dot{q}, t)$. If we use another
-coordinate to rewrite L as $L(Q, Q, t)$. But the Euler-Lagrange eq. is
-invariant, so $Q$ is time function of $q$ : $q \mapsto Q(q,t)$. So we can
-transition to Hamiltion mechanics. 哈密顿力学允许更广泛 的变换. 哈密顿力学允许
-新坐标作为旧坐标/动量的函数; 新动量作为旧坐标/动量的函数. 
+在把 Legendre 变换的变量改为 $q_ \alpha , q_ \alpha $, 可以得到
+\[
+U_3 = U_1 - \sum_{\alpha }^{\infty} p_ \alpha q_ \alpha  
+\] 
 
-并非所有这种变换可以保持哈密顿方程不变. 要 $(q,p,H)\mapsto (Q,P,H)$, 要求新系统
-仍旧保持正则方程性质不变, 问需要对变换加入什么限制? 
-
-如果正则方程满足, 等价于作用量的变分等于0. 这意味着 
-$\delta [\int PdQ - H' dt] =0$. $H'$ is the new Hamiltionian. \\
-Old: $\delta \int [pdq - Hdt]=0$. 
-If $pdq - Hdt = PdQ - H'dt + dF$. Here the $F$ funciton is called the genrator
-(生成函数). 
-
-我们可以把 $dF = pdq - PdQ + (H'-H) dt$. i.e. $F=F(q,Q,t)$. 此时,
-$p = \frac{\partial F}{\partial q} , P = \frac{\partial F}{\partial Q}, H' + H
-+ \frac{\partial F}{\partial t} $ 
-
-正则变换是保泊松括号的. 
-
-我们用的生成函数是 $F+PQ$. 
-$d(F+PQ) = pdq + QdP + (H' -H) dt$, $p = \frac{\partial \Phi }{\partial q} $, 
-$Q = \frac{\partial \Phi }{\partial P} $, $H' = H + \frac{\partial \Phi }{\partial
-t} $
-
-
-
-
-
-
-
-
-
-
-
-
+把变量改为 $q_ \alpha , p_ \alpha , q'_ \alpha , p'_ \alpha $, 可得到
+\[
+U_4 = U_1 - \sum_{\alpha }^{\infty} p_ \alpha q_ \alpha +  
+\sum_{\alpha }^{\infty} p'_ \alpha q'_ \alpha  
+\] 
+\footnote{$U_4$ 其实就是结合 $U_2, u_3$.}
 \end{document}
+
